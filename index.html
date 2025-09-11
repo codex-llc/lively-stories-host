@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Lively Stories</title>
+  <script>
+    window.onload = function () {
+      const urlParams = new URLSearchParams(window.location.search);
+      const storyId = urlParams.get("id");
+
+      if (storyId) {
+        // Try to open the app via custom scheme
+        window.location = "livelystories://story?id=" + storyId;
+      } else {
+        document.body.innerHTML = "<h2>No story ID provided</h2>";
+      }
+
+      // Fallback: Play Store link
+      setTimeout(() => {
+        window.location = "https://play.google.com/store/apps/details?id=com.lively.app";
+      }, 1000);
+    };
+  </script>
+</head>
+<body>
+  <h2>Opening Lively Stories app...</h2>
+</body>
+</html>
