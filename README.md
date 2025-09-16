@@ -49,7 +49,7 @@ We warmly welcome contributors of all skill levels who want to help improve and 
 
 ---
 
-# # 🤝 Contributing
+## 🤝 Contributing
 
 We love contributions and welcome everyone who wants to help!
 Here’s how you can get involved:
@@ -72,7 +72,7 @@ If you’re not sure where to start, check out the Issues tab or suggest new ide
 
 ---
 
-##📜 Contribution Rules
+## 📜 Contribution Rules
 
 ✅ Keep code clean, readable, and well-documented
 ✅ Write meaningful commit messages (e.g., fix:, feat:, docs:)
@@ -83,7 +83,7 @@ If you’re not sure where to start, check out the Issues tab or suggest new ide
 
 ---
 
-# # 📌 Code of Conduct
+## 📌 Code of Conduct
 
 Be kind and respectful to others
 
@@ -97,7 +97,7 @@ Collaborate openly — we’re all here to learn and build together 🚀
 
 ---
 
-# # 🌍 Community
+## 🌍 Community
 
 Every issue opened, PR submitted, or suggestion shared helps make Lively! better.
 We value every contributor, no matter how big or small the contribution. ✨
@@ -107,7 +107,7 @@ If you’d like to showcase your work, we’ll happily recognize contributors in
 
 ---
 
-# # 📄 License
+## 📄 License
 
 This project is licensed under the **MIT License**.
 You are free to use, modify, and distribute with proper attribution.
