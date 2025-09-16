@@ -1,28 +1,146 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Lively Stories</title>
-  <script>
-    window.onload = function () {
-      const urlParams = new URLSearchParams(window.location.search);
-      const storyId = urlParams.get("id");
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Read Compose</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+    body {
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+      background-color: #121212;
+      color: #ffffff;
+    }
+    .container { padding: 20px; }
+    .header { display: flex; align-items: center; margin-bottom: 24px; }
+    .back-arrow { font-size: 28px; font-weight: bold; color: #e0e0e0; cursor: pointer; }
+    .main-title { font-size: 36px; font-weight: 700; color: #e0e0e0; margin: 0 0 24px 4px; }
+    .card { background-color: #ffffff; color: #121212; border-radius: 30px 30px 0 0; padding: 30px 24px; position: relative; min-height: calc(100vh - 180px); }
+    .card-header-icon { position: absolute; top: 24px; right: 24px; width: 32px; height: 32px; background-color: #f0f0f0; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+    .card-header-icon svg { width: 18px; height: 18px; fill: #888; }
+    .author-info { display: flex; align-items: center; margin-bottom: 32px; }
+    .author-avatar { width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(45deg,#405de6,#5851db,#833ab4,#c13584,#e1306c,#fd1d1d); margin-right: 12px; }
+    .author-name { font-size: 16px; font-weight: 500; color: #000000; }
+    .article-title { font-size: 28px; font-weight: 700; margin: 0 0 10px 0; color: #000; }
+    .article-subtitle { font-size: 14px; font-weight: 700; color: #6c757d; letter-spacing: 1px; text-transform: uppercase; margin: 0 0 32px 0; }
+    .article-body p { font-size: 16px; line-height: 1.7; color: #333; margin: 0 0 20px 0; }
+    .post-list a { display:block; padding:10px; margin:6px 0; background:#eee; border-radius:10px; text-decoration:none; color:#000; font-weight:500; }
+  </style>
 
-      if (storyId) {
-        // Try to open the app via custom scheme
-        window.location = "livelystories://story?id=" + storyId;
-      } else {
-        document.body.innerHTML = "<h2>No story ID provided</h2>";
-      }
+  <!-- Firebase SDK -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+    import { getDatabase, ref, get, child } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js";
 
-      // Fallback: Play Store link
-      setTimeout(() => {
-        window.location = "https://play.google.com/store/apps/details?id=com.lively.app";
-      }, 1000);
+    const firebaseConfig = {
+      apiKey: "AIzaSyBgaZDOtI6i5o5c3FbOlFCSLqUdNTG-sHM",
+      authDomain: "lively-stories.firebaseapp.com",
+      databaseURL: "https://lively-stories-default-rtdb.asia-southeast1.firebasedatabase.app",
+      projectId: "lively-stories",
+      storageBucket: "lively-stories.firebasestorage.app",
+      messagingSenderId: "782979601947",
+      appId: "1:782979601947:web:9d8d4eccc4811baa3acabe",
+      measurementId: "G-E3VN4N7V57"
     };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+
+    // get post id from url
+    const params = new URLSearchParams(window.location.search);
+    const postKey = params.get("id");
+
+    const titleEl = document.getElementById("articleTitle");
+    const subtitleEl = document.getElementById("articleSubtitle");
+    const bodyEl = document.getElementById("articleBody");
+    const authorEl = document.getElementById("authorName");
+
+    if (postKey) {
+      // Try fetching this post
+      const postRef = ref(db, "posts/" + postKey);
+      get(postRef).then(snapshot => {
+        if (snapshot.exists()) {
+          const data = snapshot.val();
+          authorEl.textContent = data.uid || "Unknown";
+          titleEl.textContent = data.title || "Untitled";
+          subtitleEl.textContent = data.date || "";
+
+          // ✅ Split story into paragraphs
+          const storyText = data.story || "";
+          bodyEl.innerHTML = ""; // clear old
+          storyText.split("\n").forEach(line => {
+            if (line.trim() !== "") {
+              const p = document.createElement("p");
+              p.textContent = line;
+              bodyEl.appendChild(p);
+            }
+          });
+        } else {
+          titleEl.textContent = "Story not found";
+          showAllPosts(); // fallback
+        }
+      }).catch(err => {
+        console.error(err);
+        titleEl.textContent = "Error loading story";
+      });
+    } else {
+      titleEl.textContent = "Choose a story:";
+      showAllPosts();
+    }
+
+    // Function: list all posts
+    function showAllPosts() {
+      const dbRef = ref(db);
+      get(child(dbRef, "posts")).then(snapshot => {
+        if (snapshot.exists()) {
+          const posts = snapshot.val();
+          const listContainer = document.createElement("div");
+          listContainer.className = "post-list";
+          for (const key in posts) {
+            const a = document.createElement("a");
+            a.href = "?id=" + key;
+            a.textContent = posts[key].title || key;
+            listContainer.appendChild(a);
+          }
+          bodyEl.innerHTML = "";
+          bodyEl.appendChild(listContainer);
+        } else {
+          bodyEl.textContent = "No posts found in database.";
+        }
+      }).catch(err => console.error("DB Error:", err));
+    }
   </script>
 </head>
 <body>
-  <h2>Opening Lively Stories app...</h2>
+  <div class="container">
+    <header class="header">
+      <span class="back-arrow" onclick="window.location='/'">&larr;</span>
+    </header>
+    
+    <h1 class="main-title">Read Compose</h1>
+    
+    <main class="card">
+      <div class="card-header-icon">
+        <svg viewBox="0 0 24 24">
+          <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+        </svg>
+      </div>
+      
+      <div class="author-info">
+        <div class="author-avatar"></div>
+        <div id="authorName" class="author-name">Loading...</div>
+      </div>
+      
+      <article>
+        <h2 id="articleTitle" class="article-title">Loading...</h2>
+        <h3 id="articleSubtitle" class="article-subtitle"></h3>
+        
+        <div class="article-body" id="articleBody">
+          <p>Please wait...</p>
+        </div>
+      </article>
+    </main>
+  </div>
 </body>
 </html>
