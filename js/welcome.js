@@ -23,7 +23,7 @@ auth.onAuthStateChanged((user) => {
     // Check if the user is logged in AND if the current page is NOT home.html
     if (user && window.location.pathname !== '/home.html') {
         // Use replace() to prevent the user from going back to the login page
-        window.location.replace("home.html");
+       window.location.replace("home.html");
     }
 });
 
@@ -34,6 +34,7 @@ const createAccountButton = document.getElementById('createAccountButton');
 signInButton.addEventListener('click', () => {
     console.log("Sign into an Account button clicked.");
     // Add Firebase sign-in logic here
+    window.location.replace("login.html");
 });
 
 createAccountButton.addEventListener('click', () => {
