@@ -1,122 +1,36 @@
-# 🌟 Lively! Web App  
-*A Creative Community for Sharing Stories, Poems, Advice & Shayaris*  
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-Welcome to the **official web app repository** of **Lively!** 🎉  
-Lively! is a platform where people can **share stories, poems, life advice, and Shayaris** — whether original, inspired, or AI-generated. Other users can **read, rate, and engage** with these posts in the forum section.  
+## Getting Started
 
-This repo contains the **source code for the web application**.  
-We warmly welcome contributors of all skill levels who want to help improve and grow this project. 💜  
+First, run the development server:
 
----
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
+```
 
-## ✨ Features
-- 📝 **Write & Share** – Post your original creations or AI-generated content.  
-- 📖 **Discover & Read** – Explore stories, poems, and Shayaris from creators worldwide.  
-- ⭐ **Rate & React** – Like, comment, and rate posts in the **Forum Section**.  
-- ⚡ **AI + Creativity** – Overcome writer’s block with AI-assisted ideas.  
-- 🌍 **Community First** – A safe, inclusive, and creative environment.  
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
----
+You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
 
-## 🛠 Tech Stack
-- **Frontend** – React (JavaScript, HTML, CSS)  
-- **Backend** – Firebase (Realtime Database, Auth, Hosting)  
-- **Hosting** – Firebase Hosting  
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
----
+## Learn More
 
-## 🚀 Getting Started
+To learn more about Next.js, take a look at the following resources:
 
-1. **Fork & Clone the Repository**
-   ```bash
-   git clone https://github.com/your-username/lively-web.git
-   cd lively-web
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-2. **Install Dependencies**
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-   ```npm install```
+## Deploy on Vercel
 
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-3. **Run Locally**
-
-   ```npm run dev```
-
-
-4. **Open http://localhost:3000 in your browser 🎉**
-
-
-
-
----
-
-## 🤝 Contributing
-
-We love contributions and welcome everyone who wants to help!
-Here’s how you can get involved:
-
-1. **Fork the repository**
-
-
-2. **Create a new branch (feature/your-feature-name)**
-
-
-3. **Make your changes and commit with clear messages**
-
-
-4. **Push to your fork and submit a Pull Request**
-
-
-
-If you’re not sure where to start, check out the Issues tab or suggest new ideas.
-
-
----
-
-## 📜 Contribution Rules
-
-✅ Keep code clean, readable, and well-documented
-✅ Write meaningful commit messages (e.g., fix:, feat:, docs:)
-✅ Follow the existing project structure and naming conventions
-✅ Be respectful and collaborative during reviews
-❌ Do not push directly to the main branch
-
-
----
-
-## 📌 Code of Conduct
-
-Be kind and respectful to others
-
-Provide constructive feedback, not criticism
-
-Avoid offensive, harmful, or irrelevant content
-
-Collaborate openly — we’re all here to learn and build together 🚀
-
-
-
----
-
-## 🌍 Community
-
-Every issue opened, PR submitted, or suggestion shared helps make Lively! better.
-We value every contributor, no matter how big or small the contribution. ✨
-
-If you’d like to showcase your work, we’ll happily recognize contributors in this repo.
-
-
----
-
-## 📄 License
-
-This project is licensed under the **MIT License**.
-You are free to use, modify, and distribute with proper attribution.
-
-
----
-
-> 💡 “Your words can change the world. Let’s build the stage together.”
-
-
-
----
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
